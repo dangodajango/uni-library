@@ -1,24 +1,29 @@
 package uni.plovdiv.model;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor
 public class Author {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
