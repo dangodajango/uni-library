@@ -6,10 +6,12 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -18,9 +20,10 @@ import java.util.Set;
 public class Book {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
-    @Column(nullable = false, length = 13)
+    @Column(nullable = false, length = 13, unique = true)
     private String isbn;
 
     @Column(nullable = false, length = 20)
