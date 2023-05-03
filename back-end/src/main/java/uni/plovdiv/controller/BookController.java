@@ -21,7 +21,7 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping(name = "/all", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Retrieve all books")
     List<BookInformationDTO> getAllBooks() {
         return bookService.getAllBooks();
