@@ -5,11 +5,14 @@ http://localhost:8082/h2-console
 username: admin
 password: admin
 
-To connect to the back-end database:
-http://localhost:8081/h2-console
+<h3>Back-end urls:</h3>
+<ul>
+<li><b>To access the database:</b><br>
+<a href="http://localhost:8081/h2-console">http://localhost:8081/h2-console</a><br>
+username: admin<br>
 username: admin
-username: admin
-
-The separation is made, for security reasons, 
-the front-end database contains tables for user authentication, 
-while the back-end database store the information about the library, we don't want to mix them.
+</li><br>
+<li><b>To access swagger:</b><br>
+<a href="http://localhost:8081/swagger-ui.html">http://localhost:8081/swagger-ui.html</a>
+</li>
+</ul>
