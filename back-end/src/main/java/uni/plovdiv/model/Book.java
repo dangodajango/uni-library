@@ -43,5 +43,5 @@ public class Book {
      * The id of the user borrowed the book.
      */
     @Column(name = "borrowed_by")
-    private Long borrowedBy;
+    private UUID borrowedBy;
 }
