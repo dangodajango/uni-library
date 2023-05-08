@@ -2,7 +2,7 @@ package uni.plovdiv.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -16,11 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name", "birth_year"}))
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +27,7 @@ public class Author {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;

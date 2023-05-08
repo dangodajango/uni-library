@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,18 +44,30 @@ public class AuthorController {
         authorService.createAuthor(authorInformationDTO);
     }
 
+    /**
+     * First name, last name and birth year form a unique constraint for the author table.
+     *
+     * @param firstName                - first name of the author, which information will be updated.
+     * @param lastName                 - last name of the author, which information will be updated.
+     * @param birthYear                - birth year of the author, which information will be updated.
+     * @param updatedAuthorInformation - the new information which will be updated in the table.
+     */
+    @PutMapping(value = "/update")
+    public void updateAuthor(
+            @Parameter(example = "Ivan") @RequestParam String firstName,
+            @Parameter(example = "Vazov") @RequestParam String lastName,
+            @Parameter(example = "1850-07-09") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear,
+            @Valid @RequestBody AuthorInformationDTO updatedAuthorInformation
+    ) {
+        authorService.updateAuthor(firstName, lastName, birthYear, updatedAuthorInformation);
+    }
+
     @DeleteMapping(value = "/delete")
-    @Operation(summary = "Deletes an author",
-            parameters = {
-                    @Parameter(name = "firstName", example = "Ivan"),
-                    @Parameter(name = "lastName", example = "Vazov"),
-                    @Parameter(name = "birthYear", example = "1850-07-09"),
-            }
-    )
+    @Operation(summary = "Deletes an author")
     public void deleteAuthor(
-            @RequestParam String firstName,
-            @RequestParam String lastName,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear
+            @Parameter(example = "Ivan") @RequestParam String firstName,
+            @Parameter(example = "Vazov") @RequestParam String lastName,
+            @Parameter(example = "1850-07-09") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear
     ) {
         authorService.deleteAuthor(firstName, lastName, birthYear);
     }

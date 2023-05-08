@@ -9,10 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 import uni.plovdiv.model.Author;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, UUID> {
+
+    @Query(
+            value = "Select * FROM AUTHOR " +
+                    "WHERE first_name = :firstName " +
+                    "AND last_name = :lastName " +
+                    "AND birth_year = :birthYear",
+            nativeQuery = true
+    )
+    Optional<Author> findAuthorByFirstNameLastNameBirthDate(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("birthYear") LocalDate birthYear);
 
     /**
      * The author table has a unique constraint which consists of the

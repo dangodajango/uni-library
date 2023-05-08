@@ -8,6 +8,7 @@ import uni.plovdiv.repository.AuthorRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +39,20 @@ public class AuthorService {
                 .isAlive(authorInformationDTO.isAlive())
                 .build();
         authorRepository.save(author);
+    }
+
+    public void updateAuthor(String firstName, String lastName, LocalDate birthYear, AuthorInformationDTO updatedAuthorInformation) {
+        Optional<Author> authorOptional = authorRepository.findAuthorByFirstNameLastNameBirthDate(firstName, lastName, birthYear);
+        authorOptional.ifPresentOrElse((author) -> authorRepository.save(Author.builder()
+                .id(author.getId())
+                .firstName(updatedAuthorInformation.getFirstName())
+                .lastName(updatedAuthorInformation.getLastName())
+                .nationality(updatedAuthorInformation.getNationality())
+                .birthYear(updatedAuthorInformation.getBirthYear())
+                .isAlive(updatedAuthorInformation.isAlive())
+                .build()), () -> {
+            throw new IllegalStateException(String.format("Author(%s, %s, %s) does not exist in the database.", firstName, lastName, birthYear));
+        });
     }
 
     public void deleteAuthor(String firstName, String lastName, LocalDate birthYear) {
