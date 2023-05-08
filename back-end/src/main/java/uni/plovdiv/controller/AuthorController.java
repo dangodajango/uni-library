@@ -53,10 +53,11 @@ public class AuthorController {
      * @param updatedAuthorInformation - the new information which will be updated in the table.
      */
     @PutMapping(value = "/update")
+    @Operation(summary = "Update an author")
     public void updateAuthor(
-            @Parameter(example = "Ivan") @RequestParam String firstName,
-            @Parameter(example = "Vazov") @RequestParam String lastName,
-            @Parameter(example = "1850-07-09") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear,
+            @Parameter(example = "Ivan", required = true) @RequestParam String firstName,
+            @Parameter(example = "Vazov", required = true) @RequestParam String lastName,
+            @Parameter(example = "1850-07-09", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear,
             @Valid @RequestBody AuthorInformationDTO updatedAuthorInformation
     ) {
         authorService.updateAuthor(firstName, lastName, birthYear, updatedAuthorInformation);
@@ -65,8 +66,8 @@ public class AuthorController {
     @DeleteMapping(value = "/delete")
     @Operation(summary = "Deletes an author")
     public void deleteAuthor(
-            @Parameter(example = "Ivan") @RequestParam String firstName,
-            @Parameter(example = "Vazov") @RequestParam String lastName,
+            @Parameter(example = "Ivan", required = true) @RequestParam String firstName,
+            @Parameter(example = "Vazov", required = true) @RequestParam String lastName,
             @Parameter(example = "1850-07-09") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear
     ) {
         authorService.deleteAuthor(firstName, lastName, birthYear);

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,15 @@ public class BookController {
             @Valid @RequestBody BookInformationDTO bookInformationDTO
     ) {
         bookService.createBook(bookInformationDTO);
+    }
+
+    @PutMapping(value = "/update")
+    @Operation(summary = "Update a book")
+    public void updateBook(
+            @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
+            @Valid @RequestBody BookInformationDTO bookInformationDTO
+    ) {
+        bookService.updateBook(isbn, bookInformationDTO);
     }
 
     @DeleteMapping(value = "/delete")

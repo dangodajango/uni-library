@@ -7,6 +7,7 @@ import uni.plovdiv.model.Book;
 import uni.plovdiv.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,19 @@ public class BookService {
                 .borrowedBy(null)
                 .build();
         bookRepository.save(book);
+    }
+
+    public void updateBook(String isbn, BookInformationDTO updatedBookInformation) {
+        Optional<Book> bookOptional = bookRepository.findBookByIsbn(isbn);
+        bookOptional.ifPresentOrElse((book) -> bookRepository.save(Book.builder()
+                .id(book.getId())
+                .title(updatedBookInformation.getTitle())
+                .isbn(updatedBookInformation.getIsbn())
+                .releaseDate(updatedBookInformation.getReleaseDate())
+                .price(updatedBookInformation.getPrice())
+                .build()), () -> {
+            throw new IllegalStateException(String.format("Book with %s isbn does not exist in the database", isbn));
+        });
     }
 
     public void deleteBook(String isbn) {

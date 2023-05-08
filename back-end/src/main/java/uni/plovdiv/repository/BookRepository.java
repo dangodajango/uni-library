@@ -8,10 +8,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uni.plovdiv.model.Book;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
+
+    @Query(
+            value = "SELECT * FROM BOOK " +
+                    "WHERE isbn = :isbn",
+            nativeQuery = true
+    )
+    Optional<Book> findBookByIsbn(@Param("isbn") String isbn);
 
     @Modifying
     @Transactional
