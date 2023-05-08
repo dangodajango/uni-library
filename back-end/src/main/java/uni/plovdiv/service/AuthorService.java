@@ -6,6 +6,7 @@ import uni.plovdiv.dto.author.AuthorInformationDTO;
 import uni.plovdiv.model.Author;
 import uni.plovdiv.repository.AuthorRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,5 +38,9 @@ public class AuthorService {
                 .isAlive(authorInformationDTO.isAlive())
                 .build();
         authorRepository.save(author);
+    }
+
+    public void deleteAuthor(String firstName, String lastName, LocalDate birthYear) {
+        authorRepository.deleteAuthorFromFirstNameLastNameBirthDate(firstName, lastName, birthYear);
     }
 }
