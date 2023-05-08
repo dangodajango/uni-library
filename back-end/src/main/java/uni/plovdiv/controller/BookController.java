@@ -26,5 +26,4 @@ public class BookController {
     List<BookInformationDTO> getAllBooks() {
         return bookService.getAllBooks();
     }
-
 }
