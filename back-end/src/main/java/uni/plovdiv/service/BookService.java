@@ -37,4 +37,8 @@ public class BookService {
                 .build();
         bookRepository.save(book);
     }
+
+    public void deleteBook(String isbn) {
+        bookRepository.deleteBookFromIsbn(isbn);
+    }
 }
