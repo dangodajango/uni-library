@@ -26,7 +26,6 @@ public class AuthorInformationDTO {
     private String lastName;
 
     @Schema(description = "The nationality of the author", example = "Bulgarian")
-    @NotBlank
     @Length(max = 25, message = "Nationality can be max 25 symbols!")
     private String nationality;
 

@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,7 +22,7 @@ public class Book {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false, length = 13, unique = true)
     private String isbn;
@@ -36,12 +35,12 @@ public class Book {
 
     private Double price;
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Author> authors;
-
     /**
      * The id of the user borrowed the book.
      */
     @Column(name = "borrowed_by")
-    private UUID borrowedBy;
+    private Long borrowedBy;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Author> authors;
 }

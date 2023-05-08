@@ -3,6 +3,7 @@ package uni.plovdiv.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.dto.book.BookInformationDTO;
+import uni.plovdiv.model.Book;
 import uni.plovdiv.repository.BookRepository;
 
 import java.util.List;
@@ -24,5 +25,16 @@ public class BookService {
                         .price(book.getPrice())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public void createBook(BookInformationDTO bookInformationDTO) {
+        Book book = Book.builder()
+                .title(bookInformationDTO.getTitle())
+                .isbn(bookInformationDTO.getIsbn())
+                .releaseDate(bookInformationDTO.getReleaseDate())
+                .price(bookInformationDTO.getPrice())
+                .borrowedBy(null)
+                .build();
+        bookRepository.save(book);
     }
 }
