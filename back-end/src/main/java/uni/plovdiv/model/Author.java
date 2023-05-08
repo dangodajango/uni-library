@@ -12,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name", "birth_year"}))
 @Getter
 @Builder
 @AllArgsConstructor
@@ -27,7 +30,7 @@ public class Author {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "first_name", nullable = false, length = 20)
+    @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 25)

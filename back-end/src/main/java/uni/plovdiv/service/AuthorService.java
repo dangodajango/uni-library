@@ -6,7 +6,6 @@ import uni.plovdiv.dto.author.AuthorInformationDTO;
 import uni.plovdiv.model.Author;
 import uni.plovdiv.repository.AuthorRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,13 +28,13 @@ public class AuthorService {
                 .collect(Collectors.toList());
     }
 
-    public void createAuthor(String firstName, String lastName, String nationality, LocalDate birthYear, boolean isAlive) {
+    public void createAuthor(AuthorInformationDTO authorInformationDTO) {
         Author author = Author.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .nationality(nationality)
-                .birthYear(birthYear)
-                .isAlive(isAlive)
+                .firstName(authorInformationDTO.getFirstName())
+                .lastName(authorInformationDTO.getLastName())
+                .nationality(authorInformationDTO.getNationality())
+                .birthYear(authorInformationDTO.getBirthYear())
+                .isAlive(authorInformationDTO.isAlive())
                 .build();
         authorRepository.save(author);
     }
