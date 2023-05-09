@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Getter
@@ -40,11 +38,9 @@ public class Book {
 
     private Double price;
 
-    /**
-     * The id of the user borrowed the book.
-     */
-    @Column(name = "borrowed_by")
-    private Long borrowedBy;
+    @ManyToOne
+    @JoinColumn(name = "borrowed_by", referencedColumnName = "id", nullable = false)
+    private Patron borrowedBy;
 
     @ManyToMany()
     @JoinTable(
