@@ -47,10 +47,10 @@ public class AuthorController {
     /**
      * First name, last name and birth year form a unique constraint for the author table.
      *
-     * @param firstName                - first name of the author, which information will be updated.
-     * @param lastName                 - last name of the author, which information will be updated.
-     * @param birthYear                - birth year of the author, which information will be updated.
-     * @param updatedAuthorInformation - the new information which will be updated in the table.
+     * @param firstName                first name of the author, which information will be updated.
+     * @param lastName                 last name of the author, which information will be updated.
+     * @param birthYear                birth year of the author, which information will be updated.
+     * @param updatedAuthorInformation the new information which will be updated in the table.
      */
     @PutMapping(value = "/update")
     @Operation(summary = "Update an author")

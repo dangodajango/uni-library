@@ -33,7 +33,7 @@ public class Patron {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 20)
     private String username;
 
     @Column(nullable = false, length = 30)
