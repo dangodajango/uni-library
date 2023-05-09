@@ -5,13 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
 import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Getter
@@ -41,6 +46,11 @@ public class Book {
     @Column(name = "borrowed_by")
     private Long borrowedBy;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany()
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
     private Set<Author> authors;
 }
