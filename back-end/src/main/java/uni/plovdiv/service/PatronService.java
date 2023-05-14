@@ -3,8 +3,11 @@ package uni.plovdiv.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.dto.patron.CreatePatronDto;
+import uni.plovdiv.dto.patron.PatronInformationDto;
 import uni.plovdiv.model.Patron;
 import uni.plovdiv.repository.PatronRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +23,16 @@ public class PatronService {
                 .username(createPatronDto.getUsername())
                 .password(createPatronDto.getPassword())
                 .build());
+    }
+
+    public List<PatronInformationDto> getAllPatrons() {
+        return patronRepository.findAll()
+                .stream()
+                .map(patron -> PatronInformationDto.builder()
+                        .displayName(patron.getDisplayName())
+                        .ucn(patron.getUcn())
+                        .birthDate(patron.getBirthDate())
+                        .build())
+                .toList();
     }
 }
