@@ -34,7 +34,7 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping("/create")
     @Operation(summary = "Create a new book")
     public void createBook(
             @Valid @RequestBody BookInformationDto bookInformationDto
@@ -42,7 +42,7 @@ public class BookController {
         bookService.createBook(bookInformationDto);
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping("/update")
     @Operation(summary = "Update a book")
     public void updateBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
@@ -51,7 +51,7 @@ public class BookController {
         bookService.updateBook(isbn, updateBookInformation);
     }
 
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping("/delete")
     @Operation(summary = "Delete a book")
     public void deleteBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn
@@ -59,7 +59,7 @@ public class BookController {
         bookService.deleteBook(isbn);
     }
 
-    @PutMapping(value = "/borrow")
+    @PutMapping("/borrow")
     @Operation(summary = "Borrow a book")
     public void borrowBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
@@ -68,7 +68,7 @@ public class BookController {
         bookService.borrowBook(isbn, patronUcn);
     }
 
-    @PutMapping(value = "/return")
+    @PutMapping("/return")
     @Operation(summary = "Return the borrowed book")
     public void returnBorrowedBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
