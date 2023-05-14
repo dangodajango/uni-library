@@ -2,8 +2,8 @@ package uni.plovdiv.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uni.plovdiv.dto.author.AuthorInformationDTO;
-import uni.plovdiv.dto.book.BookInformationDTO;
+import uni.plovdiv.dto.author.AuthorInformationDto;
+import uni.plovdiv.dto.book.BookInformationDto;
 import uni.plovdiv.model.Author;
 import uni.plovdiv.repository.AuthorRepository;
 
@@ -19,10 +19,10 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
-    public List<AuthorInformationDTO> getAllAuthors() {
+    public List<AuthorInformationDto> getAllAuthors() {
         return authorRepository.findAll()
                 .stream()
-                .map(author -> AuthorInformationDTO.builder()
+                .map(author -> AuthorInformationDto.builder()
                         .firstName(author.getFirstName())
                         .lastName(author.getLastName())
                         .nationality(author.getNationality())
@@ -32,18 +32,18 @@ public class AuthorService {
                 .collect(Collectors.toList());
     }
 
-    public void createAuthor(AuthorInformationDTO authorInformationDTO) {
+    public void createAuthor(AuthorInformationDto authorInformationDto) {
         Author author = Author.builder()
-                .firstName(authorInformationDTO.getFirstName())
-                .lastName(authorInformationDTO.getLastName())
-                .nationality(authorInformationDTO.getNationality())
-                .birthYear(authorInformationDTO.getBirthYear())
-                .isAlive(authorInformationDTO.isAlive())
+                .firstName(authorInformationDto.getFirstName())
+                .lastName(authorInformationDto.getLastName())
+                .nationality(authorInformationDto.getNationality())
+                .birthYear(authorInformationDto.getBirthYear())
+                .isAlive(authorInformationDto.isAlive())
                 .build();
         authorRepository.save(author);
     }
 
-    public void updateAuthor(String firstName, String lastName, LocalDate birthYear, AuthorInformationDTO updatedAuthorInformation) {
+    public void updateAuthor(String firstName, String lastName, LocalDate birthYear, AuthorInformationDto updatedAuthorInformation) {
         Optional<Author> authorOptional = authorRepository.findAuthorByFirstNameLastNameBirthDate(firstName, lastName, birthYear);
         authorOptional.ifPresentOrElse((author) -> authorRepository.save(Author.builder()
                 .id(author.getId())
@@ -61,8 +61,8 @@ public class AuthorService {
         authorRepository.deleteAuthorFromFirstNameLastNameBirthDate(firstName, lastName, birthYear);
     }
 
-    public Set<Author> extractAuthorsFromDto(BookInformationDTO bookInformationDTO) {
-        return bookInformationDTO.getAuthors()
+    public Set<Author> extractAuthorsFromDto(BookInformationDto bookInformationDto) {
+        return bookInformationDto.getAuthors()
                 .stream()
                 .map(authorDTO -> authorRepository.findAuthorByFirstNameLastNameBirthDate(
                         authorDTO.getFirstName(),

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
-import uni.plovdiv.dto.author.AuthorBookDTO;
+import uni.plovdiv.dto.author.AuthorBookDto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public class BookInformationDTO {
+public class BookInformationDto {
 
     @Schema(description = "The title of the book", example = "Under the Yoke")
     @NotBlank
@@ -33,5 +33,5 @@ public class BookInformationDTO {
     @DecimalMin(value = "0.0", message = "Price cannot be less than 0.0!")
     private Double price;
 
-    private List<AuthorBookDTO> authors;
+    private List<AuthorBookDto> authors;
 }

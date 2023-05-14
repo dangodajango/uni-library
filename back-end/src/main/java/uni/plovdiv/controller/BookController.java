@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import uni.plovdiv.dto.book.BookInformationDTO;
+import uni.plovdiv.dto.book.BookInformationDto;
 import uni.plovdiv.service.BookService;
 
 import javax.validation.Valid;
@@ -30,25 +30,25 @@ public class BookController {
 
     @GetMapping(value = "/all", produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Retrieve all books")
-    List<BookInformationDTO> getAllBooks() {
+    List<BookInformationDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @PostMapping(value = "/create")
     @Operation(summary = "Create a new book")
     public void createBook(
-            @Valid @RequestBody BookInformationDTO bookInformationDTO
+            @Valid @RequestBody BookInformationDto bookInformationDto
     ) {
-        bookService.createBook(bookInformationDTO);
+        bookService.createBook(bookInformationDto);
     }
 
     @PutMapping(value = "/update")
     @Operation(summary = "Update a book")
     public void updateBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
-            @Valid @RequestBody BookInformationDTO bookInformationDTO
+            @Valid @RequestBody BookInformationDto updateBookInformation
     ) {
-        bookService.updateBook(isbn, bookInformationDTO);
+        bookService.updateBook(isbn, updateBookInformation);
     }
 
     @DeleteMapping(value = "/delete")

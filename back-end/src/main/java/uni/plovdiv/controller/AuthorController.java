@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import uni.plovdiv.dto.author.AuthorInformationDTO;
+import uni.plovdiv.dto.author.AuthorInformationDto;
 import uni.plovdiv.service.AuthorService;
 
 import javax.validation.Valid;
@@ -32,16 +32,16 @@ public class AuthorController {
 
     @GetMapping(value = "/all", produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Retrieve all authors")
-    public List<AuthorInformationDTO> getAllAuthors() {
+    public List<AuthorInformationDto> getAllAuthors() {
         return authorService.getAllAuthors();
     }
 
     @PostMapping(value = "/create")
     @Operation(summary = "Create a new author")
     public void createAuthor(
-            @Valid @RequestBody AuthorInformationDTO authorInformationDTO
+            @Valid @RequestBody AuthorInformationDto authorInformationDto
     ) {
-        authorService.createAuthor(authorInformationDTO);
+        authorService.createAuthor(authorInformationDto);
     }
 
     /**
@@ -58,7 +58,7 @@ public class AuthorController {
             @Parameter(example = "Ivan", required = true) @RequestParam String firstName,
             @Parameter(example = "Vazov", required = true) @RequestParam String lastName,
             @Parameter(example = "1850-07-09", required = true) @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear,
-            @Valid @RequestBody AuthorInformationDTO updatedAuthorInformation
+            @Valid @RequestBody AuthorInformationDto updatedAuthorInformation
     ) {
         authorService.updateAuthor(firstName, lastName, birthYear, updatedAuthorInformation);
     }

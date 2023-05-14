@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Builder
 @Getter
-public class PatronInformationDTO {
+public class CreatePatronDto {
 
     @Schema(description = "The display name of the patron", example = "John Doe")
     @NotBlank

@@ -2,8 +2,8 @@ package uni.plovdiv.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uni.plovdiv.dto.author.AuthorBookDTO;
-import uni.plovdiv.dto.book.BookInformationDTO;
+import uni.plovdiv.dto.author.AuthorBookDto;
+import uni.plovdiv.dto.book.BookInformationDto;
 import uni.plovdiv.model.Book;
 import uni.plovdiv.repository.BookRepository;
 
@@ -19,17 +19,17 @@ public class BookService {
 
     private final AuthorService authorService;
 
-    public List<BookInformationDTO> getAllBooks() {
+    public List<BookInformationDto> getAllBooks() {
         return bookRepository.findAll()
                 .stream()
-                .map(book -> BookInformationDTO.builder()
+                .map(book -> BookInformationDto.builder()
                         .title(book.getTitle())
                         .isbn(book.getIsbn())
                         .releaseDate(book.getReleaseDate())
                         .price(book.getPrice())
                         .authors(book.getAuthors()
                                 .stream()
-                                .map(author -> AuthorBookDTO.builder()
+                                .map(author -> AuthorBookDto.builder()
                                         .firstName(author.getFirstName())
                                         .lastName(author.getLastName())
                                         .birthYear(author.getBirthYear())
@@ -39,19 +39,19 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public void createBook(BookInformationDTO bookInformationDTO) {
+    public void createBook(BookInformationDto bookInformationDto) {
         Book book = Book.builder()
-                .title(bookInformationDTO.getTitle())
-                .isbn(bookInformationDTO.getIsbn())
-                .releaseDate(bookInformationDTO.getReleaseDate())
-                .price(bookInformationDTO.getPrice())
-                .authors(authorService.extractAuthorsFromDto(bookInformationDTO))
+                .title(bookInformationDto.getTitle())
+                .isbn(bookInformationDto.getIsbn())
+                .releaseDate(bookInformationDto.getReleaseDate())
+                .price(bookInformationDto.getPrice())
+                .authors(authorService.extractAuthorsFromDto(bookInformationDto))
                 .borrowedBy(null)
                 .build();
         bookRepository.save(book);
     }
 
-    public void updateBook(String isbn, BookInformationDTO updatedBookInformation) {
+    public void updateBook(String isbn, BookInformationDto updatedBookInformation) {
         Optional<Book> bookOptional = bookRepository.findBookByIsbn(isbn);
         bookOptional.ifPresentOrElse((book) -> bookRepository.save(Book.builder()
                 .id(book.getId())

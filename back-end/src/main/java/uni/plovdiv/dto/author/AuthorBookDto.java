@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @AllArgsConstructor
-public class AuthorBookDTO {
+public class AuthorBookDto {
 
     @Schema(description = "The first name of the author", example = "Ivan")
     @NotBlank
