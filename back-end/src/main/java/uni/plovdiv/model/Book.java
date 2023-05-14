@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +41,7 @@ public class Book {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "borrowed_by", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "borrowed_by", referencedColumnName = "id")
     private Patron borrowedBy;
 
     @ManyToMany()

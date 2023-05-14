@@ -30,7 +30,7 @@ public class BookController {
 
     @GetMapping(value = "/all", produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Retrieve all books")
-    List<BookInformationDto> getAllBooks() {
+    public List<BookInformationDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
@@ -52,9 +52,28 @@ public class BookController {
     }
 
     @DeleteMapping(value = "/delete")
+    @Operation(summary = "Delete a book")
     public void deleteBook(
             @Parameter(example = "9780306406157", required = true) @RequestParam String isbn
     ) {
         bookService.deleteBook(isbn);
+    }
+
+    @PutMapping(value = "/borrow")
+    @Operation(summary = "Borrow a book")
+    public void borrowBook(
+            @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
+            @Parameter(example = "3031071080", required = true) @RequestParam String patronUcn
+    ) {
+        bookService.borrowBook(isbn, patronUcn);
+    }
+
+    @PutMapping(value = "/return")
+    @Operation(summary = "Return the borrowed book")
+    public void returnBorrowedBook(
+            @Parameter(example = "9780306406157", required = true) @RequestParam String isbn,
+            @Parameter(example = "3031071080", required = true) @RequestParam String patronUcn
+    ) {
+        bookService.returnBorrowedBook(isbn, patronUcn);
     }
 }

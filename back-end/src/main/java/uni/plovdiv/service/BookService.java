@@ -1,13 +1,17 @@
 package uni.plovdiv.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.dto.author.AuthorBookDto;
 import uni.plovdiv.dto.book.BookInformationDto;
 import uni.plovdiv.model.Book;
+import uni.plovdiv.model.Patron;
 import uni.plovdiv.repository.BookRepository;
+import uni.plovdiv.repository.PatronRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,6 +20,8 @@ import java.util.stream.Collectors;
 public class BookService {
 
     private final BookRepository bookRepository;
+
+    private final PatronRepository patronRepository;
 
     private final AuthorService authorService;
 
@@ -68,5 +74,43 @@ public class BookService {
     public void deleteBook(String isbn) {
         Optional<Book> bookOptional = bookRepository.findBookByIsbn(isbn);
         bookOptional.ifPresent(bookRepository::delete);
+    }
+
+    public void borrowBook(String isbn, String patronUcn) {
+        Pair<Book, Patron> bookPatronPair = getBookPatronRelation(isbn, patronUcn);
+        Book bookToBeBorrowed = bookPatronPair.getFirst();
+        Patron patronBorrowingTheBook = bookPatronPair.getSecond();
+        if (!Objects.isNull(bookPatronPair.getFirst().getBorrowedBy())) {
+            throw new IllegalStateException(String.format("Book with isbn - %s is already borrowed!", isbn));
+        }
+
+        patronBorrowingTheBook.getBorrowedBooks().add(bookToBeBorrowed);
+        bookToBeBorrowed.setBorrowedBy(patronBorrowingTheBook);
+        updatePatronBookRelation(bookToBeBorrowed, patronBorrowingTheBook);
+    }
+
+    public void returnBorrowedBook(String isbn, String patronUcn) {
+        Pair<Book, Patron> bookPatronPair = getBookPatronRelation(isbn, patronUcn);
+        Book bookToBeReturned = bookPatronPair.getFirst();
+        Patron patronReturningTheBook = bookPatronPair.getSecond();
+        if (Objects.isNull(bookPatronPair.getFirst().getBorrowedBy())) {
+            throw new IllegalStateException(String.format("Book with isbn - %s is not borrowed!", isbn));
+        }
+        patronReturningTheBook.getBorrowedBooks().remove(bookToBeReturned);
+        bookToBeReturned.setBorrowedBy(null);
+        updatePatronBookRelation(bookToBeReturned, patronReturningTheBook);
+    }
+
+    private Pair<Book, Patron> getBookPatronRelation(String isbn, String patronUcn) {
+        Book book = bookRepository.findBookByIsbn(isbn)
+                .orElseThrow(() -> new IllegalStateException(String.format("Book with isbn - %s does not exist", isbn)));
+        Patron patron = patronRepository.findPatronByUcn(patronUcn)
+                .orElseThrow(() -> new IllegalStateException(String.format("Patron with ucn - %s does not exist!", patronUcn)));
+        return Pair.of(book, patron);
+    }
+
+    private void updatePatronBookRelation(Book book, Patron patron) {
+        patronRepository.save(patron);
+        bookRepository.save(book);
     }
 }
