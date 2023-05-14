@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uni.plovdiv.dto.patron.CreatePatronDto;
-import uni.plovdiv.dto.patron.PatronInformationDto;
+import uni.plovdiv.domain.dto.patron.CreatePatronDto;
+import uni.plovdiv.domain.dto.patron.PatronInformationDto;
 import uni.plovdiv.service.PatronService;
 
 import java.util.List;

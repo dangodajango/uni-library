@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import uni.plovdiv.model.Book;
+import uni.plovdiv.domain.model.Book;
 
 import java.util.Optional;
 import java.util.UUID;

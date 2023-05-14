@@ -1,11 +1,11 @@
-package uni.plovdiv.dto.book;
+package uni.plovdiv.domain.dto.book;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
-import uni.plovdiv.dto.author.AuthorBookDto;
+import uni.plovdiv.domain.dto.author.AuthorBookDto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;

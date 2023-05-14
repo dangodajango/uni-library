@@ -2,9 +2,9 @@ package uni.plovdiv.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uni.plovdiv.dto.author.AuthorInformationDto;
-import uni.plovdiv.dto.book.BookInformationDto;
-import uni.plovdiv.model.Author;
+import uni.plovdiv.domain.dto.author.AuthorInformationDto;
+import uni.plovdiv.domain.dto.book.BookInformationDto;
+import uni.plovdiv.domain.model.Author;
 import uni.plovdiv.repository.AuthorRepository;
 
 import java.time.LocalDate;

@@ -2,9 +2,9 @@ package uni.plovdiv.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uni.plovdiv.dto.patron.CreatePatronDto;
-import uni.plovdiv.dto.patron.PatronInformationDto;
-import uni.plovdiv.model.Patron;
+import uni.plovdiv.domain.dto.patron.CreatePatronDto;
+import uni.plovdiv.domain.dto.patron.PatronInformationDto;
+import uni.plovdiv.domain.model.Patron;
 import uni.plovdiv.repository.PatronRepository;
 
 import java.util.List;

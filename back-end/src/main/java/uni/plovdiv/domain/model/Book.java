@@ -1,4 +1,4 @@
-package uni.plovdiv.model;
+package uni.plovdiv.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

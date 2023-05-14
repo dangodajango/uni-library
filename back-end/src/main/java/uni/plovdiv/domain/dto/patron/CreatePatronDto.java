@@ -1,4 +1,4 @@
-package uni.plovdiv.dto.patron;
+package uni.plovdiv.domain.dto.patron;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

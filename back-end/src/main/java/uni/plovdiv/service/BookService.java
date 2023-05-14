@@ -3,10 +3,10 @@ package uni.plovdiv.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
-import uni.plovdiv.dto.author.AuthorBookDto;
-import uni.plovdiv.dto.book.BookInformationDto;
-import uni.plovdiv.model.Book;
-import uni.plovdiv.model.Patron;
+import uni.plovdiv.domain.dto.author.AuthorBookDto;
+import uni.plovdiv.domain.dto.book.BookInformationDto;
+import uni.plovdiv.domain.model.Book;
+import uni.plovdiv.domain.model.Patron;
 import uni.plovdiv.repository.BookRepository;
 import uni.plovdiv.repository.PatronRepository;
 

@@ -1,4 +1,4 @@
-package uni.plovdiv.dto.author;
+package uni.plovdiv.domain.dto.author;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @Getter
 @AllArgsConstructor
-public class AuthorBookDto {
+public class AuthorInformationDto {
 
     @Schema(description = "The first name of the author", example = "Ivan")
     @NotBlank
@@ -25,7 +25,14 @@ public class AuthorBookDto {
     @Length(max = 25, message = "Last name can be max 25 symbols!")
     private String lastName;
 
+    @Schema(description = "The nationality of the author", example = "Bulgarian")
+    @Length(max = 25, message = "Nationality can be max 25 symbols!")
+    private String nationality;
+
     @Schema(description = "The birth year of the author", example = "1850-07-09")
     @Past(message = "Birth year cannot be in the future, or today!")
     private LocalDate birthYear;
+
+    @Schema(description = "Is the author alive", example = "false")
+    private boolean isAlive;
 }
