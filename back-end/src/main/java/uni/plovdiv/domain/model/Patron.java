@@ -36,7 +36,7 @@ public class Patron {
     @Column(nullable = false, unique = true, length = 20)
     private String username;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @OneToMany(mappedBy = "borrowedBy")

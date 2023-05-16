@@ -34,6 +34,6 @@ public class CreatePatronDto {
 
     @Schema(description = "The password of the patron", example = "41NvYPQBqDhHJgt5g4Fq")
     @NotBlank
-    @Length(min = 7, max = 30, message = "Password must be between 7 and 30 symbols!")
+    @Length(min = 7, max = 100, message = "Password must be between 7 and 100 symbols!")
     private String password;
 }

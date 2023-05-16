@@ -17,4 +17,11 @@ public interface PatronRepository extends JpaRepository<Patron, Long> {
             nativeQuery = true
     )
     Optional<Patron> findPatronByUcn(@Param("ucn") String ucn);
+
+    @Query(
+            value = "SELECT * FROM PATRON " +
+                    "WHERE username = :username",
+            nativeQuery = true
+    )
+    Optional<Patron> findPatronByUsername(@Param("username") String username);
 }

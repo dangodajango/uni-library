@@ -8,6 +8,10 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console.enabled: true
+  security:
+    user:
+      name: admin
+      password: $2a$10$J52FOwZi8QEcOSGYU4GeP..Beb.OUU6sRfBZ11xB8e7ML6795s1vW
 
 server:
   port : 8081

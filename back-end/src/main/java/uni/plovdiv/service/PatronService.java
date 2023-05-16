@@ -6,6 +6,7 @@ import uni.plovdiv.domain.dto.patron.CreatePatronDto;
 import uni.plovdiv.domain.dto.patron.PatronInformationDto;
 import uni.plovdiv.domain.model.Patron;
 import uni.plovdiv.repository.PatronRepository;
+import uni.plovdiv.security.PasswordEncrypter;
 
 import java.util.List;
 
@@ -15,13 +16,15 @@ public class PatronService {
 
     private final PatronRepository patronRepository;
 
+    private final PasswordEncrypter passwordEncrypter;
+
     public void createPatron(CreatePatronDto createPatronDto) {
         patronRepository.save(Patron.builder()
                 .displayName(createPatronDto.getDisplayName())
                 .ucn(createPatronDto.getUcn())
                 .birthDate(createPatronDto.getBirthDate())
                 .username(createPatronDto.getUsername())
-                .password(createPatronDto.getPassword())
+                .password(passwordEncrypter.encryptPassword(createPatronDto.getPassword()))
                 .build());
     }
 
