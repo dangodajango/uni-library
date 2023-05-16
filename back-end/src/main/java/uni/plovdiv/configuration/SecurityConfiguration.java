@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**").authenticated()
                 .and()
                 .csrf().disable()
                 .headers().frameOptions().disable()
