@@ -22,6 +22,7 @@ public class SecurityConfiguration {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
+                .antMatchers("/patron/create", "swagger-ui/").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .csrf().disable()

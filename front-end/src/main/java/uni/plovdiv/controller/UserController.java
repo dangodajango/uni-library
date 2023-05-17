@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import uni.plovdiv.dto.SignInDto;
 import uni.plovdiv.dto.SignUpDto;
 import uni.plovdiv.service.UserService;
@@ -23,7 +24,7 @@ public class UserController {
     @PostMapping("/signin")
     public String handleSignIn(@ModelAttribute SignInDto signInDto) {
         userService.signInUser(signInDto);
-        return "null";
+        return "redirect:/home";
     }
 
     @GetMapping("/signup")
@@ -34,6 +35,12 @@ public class UserController {
     @PostMapping(value = "/signup")
     public String handleSignUp(@ModelAttribute SignUpDto signUpDto) {
         userService.signUpUser(signUpDto);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        System.out.println("dwadwad");
         return "redirect:/";
     }
 }
