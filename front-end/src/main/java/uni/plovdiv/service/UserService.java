@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.RestClient;
-import uni.plovdiv.dto.UserInformationDto;
+import uni.plovdiv.dto.user.UserInformationDto;
 
 import javax.servlet.http.HttpSession;
 

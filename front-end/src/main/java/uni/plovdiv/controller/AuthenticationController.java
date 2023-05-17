@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import uni.plovdiv.dto.SignInDto;
-import uni.plovdiv.dto.SignUpDto;
+import uni.plovdiv.dto.authentication.SignInDto;
+import uni.plovdiv.dto.authentication.SignUpDto;
 import uni.plovdiv.service.AuthenticationService;
 
 import javax.servlet.http.HttpSession;

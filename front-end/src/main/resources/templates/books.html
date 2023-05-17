@@ -104,14 +104,15 @@
     table th {
       background-color: #f2f2f2;
     }
+
     </style>
 </head>
 <body>
 <div class="navbar">
-    <a th:href="/books">Books</a>
-    <a href="#">Authors</a>
-    <a href="#">Patrons</a>
-    <a th:href="/account">Your Account</a>
+    <a th:href="@{/books}">Books</a>
+    <!--    <a th:href="#">Authors</a>-->
+    <!--    <a th:href="#">Patrons</a>-->
+    <a th:href="@{/account}">Your Account</a>
     <div class="logout">
         <a th:href="@{/logout}">Logout</a>
     </div>
@@ -130,8 +131,6 @@
             <input type="text" name="isbn" placeholder="ISBN">
             <input type="text" name="releaseDate" placeholder="Release Date">
             <input type="text" name="price" placeholder="Price">
-            <input type="text" name="authorFirstName" placeholder="Author First Name">
-            <input type="text" name="authorLastName" placeholder="Author Last Name">
             <button type="submit">Search</button>
         </form>
     </div>
@@ -144,19 +143,24 @@
             <th>ISBN</th>
             <th>Release Date</th>
             <th>Price</th>
-            <th>Author First Name</th>
-            <th>Author Last Name</th>
+            <th>Authors</th>
         </tr>
         </thead>
         <tbody>
-        <!-- Iterate over the list of books -->
         <tr th:each="book : ${books}">
             <td th:text="${book.title}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.releaseDate}"></td>
             <td th:text="${book.price}"></td>
-            <td th:text="${book.author.firstName}"></td>
-            <td th:text="${book.author.lastName}"></td>
+            <td>
+                <ul th:each="author : ${book.authors}">
+                    <li>
+                        <span th:text="${author.firstName}"></span>
+                        <span> </span>
+                        <span th:text="${author.lastName}"></span>
+                    </li>
+                </ul>
+            </td>
         </tr>
         </tbody>
     </table>

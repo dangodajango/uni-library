@@ -1,4 +1,4 @@
-package uni.plovdiv.dto;
+package uni.plovdiv.dto.authentication;
 
 import lombok.Getter;
 import lombok.Setter;

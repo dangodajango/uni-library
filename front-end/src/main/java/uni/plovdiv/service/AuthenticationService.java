@@ -8,8 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.RestClient;
-import uni.plovdiv.dto.SignInDto;
-import uni.plovdiv.dto.SignUpDto;
+import uni.plovdiv.dto.authentication.SignInDto;
+import uni.plovdiv.dto.authentication.SignUpDto;
 
 import java.nio.charset.StandardCharsets;
 
