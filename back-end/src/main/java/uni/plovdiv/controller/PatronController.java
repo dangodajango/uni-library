@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,13 @@ public class PatronController {
     @Operation(summary = "Get all patrons")
     public List<PatronInformationDto> getAllPatrons() {
         return patronService.getAllPatrons();
+    }
+
+    @GetMapping(value = "/{username}", produces = APPLICATION_JSON_VALUE)
+    public PatronInformationDto getPatronFromUsername(
+            @PathVariable String username
+    ) {
+        return patronService.getPatronFromUsername(username);
     }
 
     @PostMapping("/create")

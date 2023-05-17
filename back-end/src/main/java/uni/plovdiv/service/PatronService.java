@@ -39,6 +39,16 @@ public class PatronService {
                 .toList();
     }
 
+    public PatronInformationDto getPatronFromUsername(String username) {
+        Patron patron = patronRepository.findPatronByUsername(username)
+                .orElseThrow(() -> new IllegalStateException(String.format("Patron with such username - %s does not exist!", username)));
+        return PatronInformationDto.builder()
+                .displayName(patron.getDisplayName())
+                .ucn(patron.getUcn())
+                .birthDate(patron.getBirthDate())
+                .build();
+    }
+
     public void updatePatron(String ucn, PatronInformationDto updatedPatronInformation) {
         Patron patronToBeUpdated = patronRepository.findPatronByUcn(ucn)
                 .orElseThrow(() -> new IllegalStateException(String.format("Patron with such ucn - %s does not exist!", ucn)));
