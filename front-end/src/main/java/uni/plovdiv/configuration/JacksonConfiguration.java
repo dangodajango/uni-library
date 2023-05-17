@@ -12,6 +12,5 @@ public class JacksonConfiguration {
         return JsonMapper.builder()
                 .addModule(new JavaTimeModule())
                 .build();
-
     }
 }

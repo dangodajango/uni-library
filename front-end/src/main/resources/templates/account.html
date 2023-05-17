@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>Your Account</title>
     <style>
     body {
       font-family: Arial, sans-serif;
+      padding: 20px;
     }
 
-    .container {
+    .user-info {
       max-width: 400px;
       margin: 0 auto;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 5px;
+    }
+
+    .user-info h2 {
+      margin-bottom: 10px;
+    }
+
+    .user-info p {
+      margin-bottom: 5px;
     }
 
     .navbar {
@@ -57,13 +66,20 @@
 </head>
 <body>
 <div class="navbar">
+    <a href="#">Books</a>
+    <a href="#">Authors</a>
+    <a href="#">Patrons</a>
+    <a href="#">Your Account</a>
     <div class="logout">
         <a th:href="@{/logout}">Logout</a>
     </div>
 </div>
 
-<div class="container">
-
+<div class="user-info">
+    <h2>User Information</h2>
+    <p>Display name: <span th:text="${userInformation.displayName}"></span></p>
+    <p>UCN: <span th:text="${userInformation.ucn}"></span></p>
+    <p>Birth date: <span th:text="${userInformation.birthDate}"></span></p>
 </div>
 </body>
 </html>
