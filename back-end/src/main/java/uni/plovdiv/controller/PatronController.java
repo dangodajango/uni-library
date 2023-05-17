@@ -1,6 +1,7 @@
 package uni.plovdiv.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,8 +36,9 @@ public class PatronController {
     }
 
     @GetMapping(value = "/{username}", produces = APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get a patron by username")
     public PatronInformationDto getPatronFromUsername(
-            @PathVariable String username
+            @Parameter(example = "admin") @PathVariable String username
     ) {
         return patronService.getPatronFromUsername(username);
     }
