@@ -15,6 +15,7 @@ import uni.plovdiv.service.BookService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
 
@@ -22,25 +23,25 @@ public class BookController {
 
     private final AuthorService authorService;
 
-    @RequestMapping("/books")
+    @RequestMapping("/")
     public String books(Model model) {
         model.addAttribute("books", bookService.getAllBooks());
         return "books";
     }
 
-    @RequestMapping("/book/create")
+    @RequestMapping("/create-page")
     public String createBook(Model model) {
         List<AuthorInformationDto> authors = authorService.getAllAuthors();
         model.addAttribute("authors", authors);
         return "create-book";
     }
 
-    @PostMapping("/books/create")
+    @PostMapping("/create")
     public String createBook(
             @ModelAttribute("book") BookCreateDto bookCreateDto,
             @RequestParam("authors") String[] authorValues
     ) {
         bookService.createBook(bookCreateDto, authorValues);
-        return "redirect:/books";
+        return "redirect:/books/";
     }
 }
