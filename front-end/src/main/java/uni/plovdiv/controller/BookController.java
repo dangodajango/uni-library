@@ -44,4 +44,14 @@ public class BookController {
         bookService.createBook(bookCreateDto, authorValues);
         return "redirect:/books/";
     }
+
+    @RequestMapping("/update-page")
+    public String updateBook() {
+        return "edit-book";
+    }
+
+    @RequestMapping("/delete-page")
+    public String deleteBook() {
+        return "delete-book";
+    }
 }
