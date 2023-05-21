@@ -7,11 +7,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.plovdiv.RestClient;
+import uni.plovdiv.dto.author.AuthorInformationDto;
+import uni.plovdiv.dto.book.BookCreateDto;
 import uni.plovdiv.dto.book.BookInformationDto;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +36,42 @@ public class BookService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void createBook(BookCreateDto bookCreateDto, String[] authors) {
+        try {
+            String requestBody = objectMapper.writeValueAsString(constructRequestBodyDto(bookCreateDto, authors));
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(APPLICATION_JSON);
+            restClient.sendRequest("http://localhost:8081/book/create", POST, httpHeaders, requestBody, String.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private BookInformationDto constructRequestBodyDto(BookCreateDto bookCreateDto, String[] authors) {
+        List<AuthorInformationDto> authorInformation = parseAuthors(authors);
+        return BookInformationDto.builder()
+                .title(bookCreateDto.getTitle())
+                .isbn(bookCreateDto.getIsbn())
+                .releaseDate(LocalDate.parse(bookCreateDto.getReleaseDate()))
+                .price(bookCreateDto.getPrice())
+                .authors(authorInformation)
+                .build();
+    }
+
+    private List<AuthorInformationDto> parseAuthors(String[] authors) {
+        return Arrays.stream(authors)
+                .map(author -> {
+                    String[] authorDetails = author.split(",");
+                    String firstName = authorDetails[0];
+                    String lastName = authorDetails[1];
+                    String birthYear = authorDetails[2];
+                    return AuthorInformationDto.builder()
+                            .firstName(firstName)
+                            .lastName(lastName)
+                            .birthYear(LocalDate.parse(birthYear))
+                            .build();
+                }).toList();
     }
 }

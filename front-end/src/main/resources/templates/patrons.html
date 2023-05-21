@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Books</title>
-    <style>
+  <title>Books</title>
+  <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -109,61 +109,53 @@
 </head>
 <body>
 <div class="navbar">
-    <a th:href="@{/books}">Books</a>
-    <!--    <a th:href="#">Authors</a>-->
-    <!--    <a th:href="#">Patrons</a>-->
-    <a th:href="@{/account}">Your Account</a>
-    <div class="logout">
-        <a th:href="@{/logout}">Logout</a>
-    </div>
+  <a th:href="@{/books}">Books</a>
+  <!--    <a th:href="#">Authors</a>-->
+  <!--    <a th:href="#">Patrons</a>-->
+  <a th:href="@{/account}">Your Account</a>
+  <div class="logout">
+    <a th:href="@{/logout}">Logout</a>
+  </div>
 </div>
 
 <div class="mini-navbar">
-    <a th:href="@{/book/create}">Create Book</a>
-    <a th:href="@{/book/update}">Edit Book</a>
-    <a th:href="@{/book/delete}">Delete Book</a>
+  <a th:href="@{}">Edit Author</a>
+  <a th:href="@{}">Delete Author</a>
 </div>
 
 <div class="container">
-    <div class="search-form">
-        <form th:action="@{/books}" method="get">
-            <input type="text" name="title" placeholder="Title">
-            <input type="text" name="isbn" placeholder="ISBN">
-            <input type="text" name="releaseDate" placeholder="Release Date">
-            <input type="text" name="price" placeholder="Price">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+  <div class="search-form">
+    <form th:action="@{/authors}" method="get">
+      <input type="text" name="firstName" placeholder="First Name">
+      <input type="text" name="lastName" placeholder="Last Name">
+      <input type="text" name="nationality" placeholder="Nationality">
+      <input type="text" name="birthYear" placeholder="Birth Year">
+      <input type="text" name="isAlive" placeholder="Is Alive">
+      <button type="submit">Search</button>
+    </form>
+  </div>
 
-    <h2>Book List</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>ISBN</th>
-            <th>Release Date</th>
-            <th>Price</th>
-            <th>Authors</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.isbn}"></td>
-            <td th:text="${book.releaseDate}"></td>
-            <td th:text="${book.price}"></td>
-            <td>
-                <ul th:each="author : ${book.authors}">
-                    <li>
-                        <span th:text="${author.firstName}"></span>
-                        <span> </span>
-                        <span th:text="${author.lastName}"></span>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+  <h2>Patron List</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Nationality</th>
+      <th>Birth Year</th>
+      <th>Is Alive</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patron : ${patrons}">
+      <td th:text="${author.firstName}"></td>
+      <td th:text="${author.lastName}"></td>
+      <td th:text="${author.nationality}"></td>
+      <td th:text="${author.birthYear}"></td>
+      <td th:text="${author.isAlive}"></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
