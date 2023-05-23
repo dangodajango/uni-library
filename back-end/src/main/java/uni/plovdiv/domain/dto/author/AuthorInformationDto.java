@@ -1,5 +1,6 @@
 package uni.plovdiv.domain.dto.author;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +35,6 @@ public class AuthorInformationDto {
     private LocalDate birthYear;
 
     @Schema(description = "Is the author alive", example = "false")
+    @JsonProperty("isAlive")
     private boolean isAlive;
 }

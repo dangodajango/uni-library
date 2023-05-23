@@ -31,7 +31,7 @@ public class BookController {
 
     @RequestMapping("/create-page")
     public String createBook(Model model) {
-        List<AuthorInformationDto> authors = authorService.getAllAuthors();
+        List<AuthorInformationDto> authors = authorService.getAllAuthorsInformationForExternal();
         model.addAttribute("authors", authors);
         return "create-book";
     }
