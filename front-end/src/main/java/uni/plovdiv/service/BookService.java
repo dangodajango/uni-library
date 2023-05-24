@@ -15,8 +15,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Service
@@ -73,5 +75,30 @@ public class BookService {
                             .birthYear(LocalDate.parse(birthYear))
                             .build();
                 }).toList();
+    }
+
+    public BookInformationDto findBookByIsbn(String isbn) {
+        return getAllBooks()
+                .stream()
+                .filter(book -> book.getIsbn().equals(isbn))
+                .findFirst()
+                .orElseThrow(IllegalAccessError::new);
+    }
+
+    public void updateBook(String isbn, BookCreateDto bookCreateDto, String[] authors) {
+        try {
+            String requestBody = objectMapper.writeValueAsString(constructRequestBodyDto(bookCreateDto, authors));
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(APPLICATION_JSON);
+            restClient.sendRequest(String.format("http://localhost:8081/book/update?isbn=%s", isbn), PUT, httpHeaders, requestBody, String.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteBook(String isbn) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(APPLICATION_JSON);
+        restClient.sendRequest(String.format("http://localhost:8081/book/delete?isbn=%s", isbn), DELETE, httpHeaders, String.class);
     }
 }

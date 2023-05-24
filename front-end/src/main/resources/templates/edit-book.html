@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit book</title>
+    <title>Create Book</title>
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@
       margin-bottom: 5px;
     }
 
-    .form-group input[type="text"] {
+    .form-group select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -79,7 +79,9 @@
       border-radius: 4px;
       cursor: pointer;
     }
-  </style>
+
+
+    </style>
 </head>
 <body>
 <div class="navbar">
@@ -93,39 +95,32 @@
 </div>
 
 <div class="container">
-    <h2>Edit Book</h2>
-    <form th:action="@{/books/edit}" method="post">
-        <div class="form-group">
-            <label for="isbnToEdit">ISBN of the book, which will be edited:</label>
-            <input type="text" id="isbnToEdit" name="isbnToEdit">
-        </div>
+    <h2>Edit book</h2>
+    <form th:action="@{/books/edit}" method="post" th:object="${authorUpdated}">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" th:value="${book.title}">
         </div>
         <div class="form-group">
             <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn">
+            <input type="text" id="isbn" name="isbn" th:value="${book.isbn}">
         </div>
         <div class="form-group">
-            <label for="releaseDate">Release Date:</label>
-            <input type="text" id="releaseDate" name="releaseDate">
+            <label for="releaseDate">Release date:</label>
+            <input type="text" id="releaseDate" name="releaseDate" th:value="${book.releaseDate}">
         </div>
         <div class="form-group">
             <label for="price">Price:</label>
-            <input type="text" id="price" name="price">
+            <input type="text" id="price" name="price" th:value="${book.price}">
         </div>
         <div class="form-group">
-            <label for="authorFirstName">Author First Name:</label>
-            <input type="text" id="authorFirstName" name="authorFirstName">
-        </div>
-        <div class="form-group">
-            <label for="authorLastName">Author Last Name:</label>
-            <input type="text" id="authorLastName" name="authorLastName">
-        </div>
-        <div class="form-group">
-            <label for="authorBirthDate">Author Birth Date:</label>
-            <input type="text" id="authorBirthDate" name="authorBirthDate">
+            <label>Authors:</label>
+            <div th:each="author : ${authors}">
+                <label>
+                    <input type="checkbox" name="authors" th:value="${author.workAroundValue}"
+                           th:text="${author.firstName + ' ' + author.lastName + ' ' + author.birthYear}">
+                </label>
+            </div>
         </div>
         <button type="submit">Edit</button>
     </form>
