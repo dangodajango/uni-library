@@ -99,7 +99,6 @@ public class AuthorService {
         String uri = String.format("http://localhost:8081/author/delete?firstName=%s&lastName=%s&birthYear=%s", firstName, lastName, birthYear);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(APPLICATION_JSON);
-        String emptyRequestBody = "";
-        restClient.sendRequest(uri, DELETE, httpHeaders, emptyRequestBody, String.class);
+        restClient.sendRequest(uri, DELETE, httpHeaders, String.class);
     }
 }

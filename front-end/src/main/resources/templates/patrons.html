@@ -111,7 +111,7 @@
 <div class="navbar">
   <a th:href="@{/books/}">Books</a>
   <a th:href="@{/authors/}">Authors</a>
-  <!--    <a th:href="#">Patrons</a>-->
+  <a th:href="@{/patrons/}">Patrons</a>
   <a th:href="@{/account}">Your Account</a>
   <div class="logout">
     <a th:href="@{/logout}">Logout</a>
@@ -119,18 +119,16 @@
 </div>
 
 <div class="mini-navbar">
-  <a th:href="@{}">Edit Author</a>
-  <a th:href="@{}">Delete Author</a>
+  <a th:href="@{/patrons/}">Edit Patron</a>
+  <a th:href="@{/patrons/delete-page}">Delete Patron</a>
 </div>
 
 <div class="container">
   <div class="search-form">
-    <form th:action="@{/authors}" method="get">
-      <input type="text" name="firstName" placeholder="First Name">
-      <input type="text" name="lastName" placeholder="Last Name">
-      <input type="text" name="nationality" placeholder="Nationality">
-      <input type="text" name="birthYear" placeholder="Birth Year">
-      <input type="text" name="isAlive" placeholder="Is Alive">
+    <form th:action="@{/patrons/}" method="get">
+      <input type="text" name="displayName" placeholder="Display Name">
+      <input type="text" name="ucn" placeholder="UCN">
+      <input type="text" name="birthDate" placeholder="Birth Date">
       <button type="submit">Search</button>
     </form>
   </div>
@@ -139,20 +137,16 @@
   <table>
     <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Nationality</th>
-      <th>Birth Year</th>
-      <th>Is Alive</th>
+      <th>Display Name</th>
+      <th>UCN</th>
+      <th>Birth Date</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="patron : ${patrons}">
-      <td th:text="${author.firstName}"></td>
-      <td th:text="${author.lastName}"></td>
-      <td th:text="${author.nationality}"></td>
-      <td th:text="${author.birthYear}"></td>
-      <td th:text="${author.isAlive}"></td>
+      <td th:text="${patron.displayName}"></td>
+      <td th:text="${patron.ucn}"></td>
+      <td th:text="${patron.birthDate}"></td>
     </tr>
     </tbody>
   </table>
