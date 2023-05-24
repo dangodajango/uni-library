@@ -1,6 +1,7 @@
 package uni.plovdiv.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import uni.plovdiv.dto.book.BookInformationDto;
 import uni.plovdiv.service.AuthorService;
 import uni.plovdiv.service.BookService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -28,8 +30,15 @@ public class BookController {
     private final AuthorService authorService;
 
     @RequestMapping("/")
-    public String books(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+    public String books(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String isbn,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate releaseDate,
+            @RequestParam(required = false) Double price,
+            Model model
+    ) {
+        List<BookInformationDto> books = bookService.getAllBooks(title, isbn, releaseDate, price);
+        model.addAttribute("books", books);
         return "books";
     }
 

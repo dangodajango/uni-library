@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Book</title>
+    <title>Create Author</title>
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -93,7 +93,7 @@
 </div>
 
 <div class="container">
-    <h2>Create Book</h2>
+    <h2>Create Author</h2>
     <form th:action="@{/authors/create}" method="post" th:object="${author}">
         <div class="form-group">
             <label for="firstName">First name:</label>

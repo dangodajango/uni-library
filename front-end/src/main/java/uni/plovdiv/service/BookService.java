@@ -40,6 +40,15 @@ public class BookService {
         }
     }
 
+    public List<BookInformationDto> getAllBooks(String title, String isbn, LocalDate releaseDate, Double price) {
+        return getAllBooks().stream()
+                .filter(book -> title == null || title.isBlank() || book.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .filter(book -> isbn == null || isbn.isBlank() || book.getIsbn().equals(isbn))
+                .filter(book -> releaseDate == null || !(book.getReleaseDate() == null) && book.getReleaseDate().equals(releaseDate))
+                .filter(book -> price == null || !(book.getPrice() == null) && book.getPrice().equals(price))
+                .toList();
+    }
+
     public void createBook(BookCreateDto bookCreateDto, String[] authors) {
         try {
             String requestBody = objectMapper.writeValueAsString(constructRequestBodyDto(bookCreateDto, authors));

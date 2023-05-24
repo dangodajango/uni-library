@@ -43,7 +43,7 @@ public class AuthenticationController {
 
     @RequestMapping("/logout")
     public String logout() {
-        System.out.println("dwadwad");
+        authenticationService.logout();
         return "redirect:/";
     }
 }

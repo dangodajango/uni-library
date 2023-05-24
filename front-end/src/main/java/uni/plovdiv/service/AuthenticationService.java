@@ -58,4 +58,8 @@ public class AuthenticationService {
             throw new RuntimeException(e);
         }
     }
+
+    public void logout() {
+        restClient.sendRequest("http://localhost:8081/logout", POST, new HttpHeaders(), String.class);
+    }
 }
