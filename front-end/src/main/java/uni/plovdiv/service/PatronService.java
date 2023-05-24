@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Service
@@ -42,6 +43,24 @@ public class PatronService {
                 .filter(patron -> ucn == null || ucn.isBlank() || patron.getUcn().equals(ucn))
                 .filter(patron -> birthDate == null || !(patron.getBirthDate() == null) && patron.getBirthDate().equals(birthDate))
                 .toList();
+    }
+
+    public UserInformationDto findPatronByUcn(String ucn) {
+        return getAllPatronsInformation().stream()
+                .filter(patron -> patron.getUcn().equals(ucn))
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    public void editPatron(String oldUcn, UserInformationDto updatedPatron) {
+        try {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(APPLICATION_JSON);
+            String requestBody = objectMapper.writeValueAsString(updatedPatron);
+            restClient.sendRequest(String.format("http://localhost:8081/patron/update?ucn=%s", oldUcn), PUT, httpHeaders, requestBody, String.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deletePatron(String ucn) {
