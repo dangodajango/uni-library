@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit book</title>
+    <title>Create Book</title>
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@
       margin-bottom: 5px;
     }
 
-    .form-group input[type="text"] {
+    .form-group select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -79,12 +79,14 @@
       border-radius: 4px;
       cursor: pointer;
     }
-  </style>
+
+
+    </style>
 </head>
 <body>
 <div class="navbar">
     <a th:href="@{/books/}">Books</a>
-    <!--    <a th:href="#">Authors</a>-->
+    <a th:href="@{/authors/}">Authors</a>
     <!--    <a th:href="#">Patrons</a>-->
     <a th:href="@{/account}">Your Account</a>
     <div class="logout">
@@ -93,11 +95,30 @@
 </div>
 
 <div class="container">
-    <h2>Edit Book</h2>
-    <form th:action="@{/books/isbn}" method="post">
+    <h2>Edit author</h2>
+    <form th:action="@{/authors/edit}" method="post" th:object="${authorUpdated}">
         <div class="form-group">
-            <label for="isbnToEdit">ISBN of the book, which will be edited:</label>
-            <input type="text" id="isbnToEdit" name="isbn">
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" name="firstName" th:value="${author.firstName}">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name:</label>
+            <input type="text" id="lastName" name="lastName" th:value="${author.lastName}">
+        </div>
+        <div class="form-group">
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" th:value="${author.nationality}">
+        </div>
+        <div class="form-group">
+            <label for="birthYear">Birth year:</label>
+            <input type="text" id="birthYear" name="birthYear" th:value="${author.birthYear}">
+        </div>
+        <div class="form-group">
+            <label for="isAlive">Alive:</label>
+            <select id="isAlive" name="isAlive">
+                <option value="true" th:selected="${author.isAlive}">True</option>
+                <option value="false" th:selected="${!author.isAlive}">False</option>
+            </select>
         </div>
         <button type="submit">Edit</button>
     </form>

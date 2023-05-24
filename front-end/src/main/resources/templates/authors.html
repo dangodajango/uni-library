@@ -110,7 +110,7 @@
 <body>
 <div class="navbar">
   <a th:href="@{/books/}">Books</a>
-  <!--    <a th:href="#">Authors</a>-->
+  <a th:href="@{/authors/}">Authors</a>
   <!--    <a th:href="#">Patrons</a>-->
   <a th:href="@{/account}">Your Account</a>
   <div class="logout">
@@ -120,8 +120,8 @@
 
 <div class="mini-navbar">
   <a th:href="@{/authors/create-page}">Create Author</a>
-  <a th:href="@{/}">Edit Author</a>
-  <a th:href="@{/}">Delete Author</a>
+  <a th:href="@{/authors/edit/author-info}">Edit Author</a>
+  <a th:href="@{/authors/delete-page}">Delete Author</a>
 </div>
 
 <div class="container">

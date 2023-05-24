@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Delete book</title>
+    <title>Create Book</title>
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@
       margin-bottom: 5px;
     }
 
-    .form-group input[type="text"] {
+    .form-group select {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -73,18 +73,20 @@
 
     .form-group button {
       padding: 8px 15px;
-      background-color: #f44336;
+      background-color: #4CAF50;
       color: #fff;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
-  </style>
+
+
+    </style>
 </head>
 <body>
 <div class="navbar">
     <a th:href="@{/books/}">Books</a>
-    <!--    <a th:href="#">Authors</a>-->
+    <a th:href="@{/authors/}">Authors</a>
     <!--    <a th:href="#">Patrons</a>-->
     <a th:href="@{/account}">Your Account</a>
     <div class="logout">
@@ -93,21 +95,21 @@
 </div>
 
 <div class="container">
-    <h2>Delete author</h2>
-    <form th:action="@{/authors/delete}" method="post">
+    <h2>Edit author</h2>
+    <form th:action="@{/authors/find}" method="post">
         <div class="form-group">
-            <label for="firstName">First name</label>
+            <label for="firstName">First name:</label>
             <input type="text" id="firstName" name="firstName">
         </div>
         <div class="form-group">
-            <label for="lastName">Last name</label>
+            <label for="lastName">Last name:</label>
             <input type="text" id="lastName" name="lastName">
         </div>
         <div class="form-group">
-            <label for="birthYear">Birth year</label>
+            <label for="birthYear">Birth year:</label>
             <input type="text" id="birthYear" name="birthYear">
         </div>
-        <button type="submit">Delete</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 </body>
