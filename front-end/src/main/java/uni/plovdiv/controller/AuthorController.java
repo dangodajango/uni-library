@@ -26,8 +26,15 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @RequestMapping("/")
-    public String getAllAuthors(Model model) {
-        List<FullAuthorInformationDto> authors = authorService.getAllAuthorsFullInformation();
+    public String getAllAuthors(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String nationality,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthYear,
+            @RequestParam(required = false) Boolean isAlive,
+            Model model
+    ) {
+        List<FullAuthorInformationDto> authors = authorService.getAllAuthorsFullInformation(firstName, lastName, nationality, birthYear, isAlive);
         model.addAttribute("authors", authors);
         return "authors";
     }

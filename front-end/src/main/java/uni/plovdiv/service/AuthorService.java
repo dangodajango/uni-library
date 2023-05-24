@@ -50,6 +50,16 @@ public class AuthorService {
         }
     }
 
+    public List<FullAuthorInformationDto> getAllAuthorsFullInformation(String firstName, String lastName, String nationality, LocalDate birthYear, Boolean isAlive) {
+        return getAllAuthorsFullInformation().stream()
+                .filter(author -> firstName == null || author.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
+                .filter(author -> lastName == null || author.getLastName().toLowerCase().contains(lastName.toLowerCase()))
+                .filter(author -> nationality == null || author.getNationality().toLowerCase().contains(nationality.toLowerCase()))
+                .filter(author -> birthYear == null || author.getBirthYear().equals(birthYear))
+                .filter(author -> isAlive == null || author.isAlive() == isAlive)
+                .toList();
+    }
+
     public FullAuthorInformationDto findAuthorByFirstNameLastNameBirthYear(String firstName, String lastName, LocalDate birthYear) {
         return getAllAuthorsFullInformation().stream()
                 .filter(author ->
